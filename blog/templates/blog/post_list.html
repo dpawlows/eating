@@ -3,16 +3,21 @@
     <title>WhatIEat</title>
   </head>
   <body>
+    <meta http-equiv="content-type" content="text/html">
     <div>
-      <h2><a href="/">What am I eating lately?</a></h2>
+      <h2><a href="/">What am I eating lately?!!!!</a></h2>
     </div>
 
-    <div>
-      <p>Published: 07/05/2018</p>
-      <h3><a href="">First post</a></h3>
-      <p>I am eating food!  It is good!</p>
-    </div>
-    
+    <!-- <pre> {% filter force_escape %} {% debug %} {% endfilter %} </pre> -->
+    {% for post in posts %}
+      <div>
+          <h3><a href="">{{ post.title }}</a></h3>
+          <p>published: {{ post.published_date }}</p>
+          <p>{{ post.text|linebreaksbr }}</p>
+      </div>
+    {% endfor %}
+
+
 
   </body>
 </html>
