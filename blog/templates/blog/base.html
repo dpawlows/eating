@@ -4,7 +4,7 @@
     <title>WhatIEat</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}?v=<?=time();?>"> <!-- remove time stuff in production! -->
     <link href="//fonts.googleapis.com/css?family=Cedarville Cursive&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Galada&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
@@ -12,11 +12,21 @@
   <body>
     <div class="page-header">
       {% if user.is_authenticated %}
+      <div>
+      <p class="top-menu"><small>Hello <a href={% url 'user_detail' pk=user.pk %} >{{ user.username }}</a>
+      (<a href="{% url 'logout' %}">logout</a>)</small></p>
+    </div>
+    <div>
         <a href="{% url 'post_new' %}" class="top-menu">
           <span class="glyphicon glyphicon-plus"></span></a>
         <a href="{% url 'post_draft_list' %}" class="top-menu">
           <span class="glyphicon glyphicon-edit"></span></a>
-
+        </div>
+      {% else %}
+         <a href="{% url 'login' %}" class="top-menu">
+           <span class="glyphicon glyphicon-lock"></span></a>
+          <a href="{% url 'signup' %}" class="top-menu">
+            <span>Contribute</span></a>
       {% endif %}
       <h1><a href="/">What am I eating?</a></h1>
     </div>

@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+  <div class="post">
+    <h3>Hello {{ user.username }}!</h3>
+    <h4>You have made a few posts...</h4>
+
+    {% for post in posts %}
+      <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+      {% if post.published_date %}
+        <p>published: {{ post.published_date }}</p>
+      {% else %}
+        <p>created: {{ post.created_date }}
+          <a href="{% url 'post_publish' pk=post.pk %}">Publish this!</a>
+        </p>
+      {% endif %}
+      <p>{{ post.text|linebreaksbr }}</p>
+    {% endfor %}
+
+  </div>
+  {% endblock %}
