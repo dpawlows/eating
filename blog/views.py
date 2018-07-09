@@ -89,5 +89,9 @@ def signup(request):
 def user_detail(request,pk):
     user = get_object_or_404(User,pk=pk)
     posts = Post.objects.filter(author=user).order_by('-created_date')
+    unpublishedCount = 0
+    for post in posts:
+        unpublishedCount += 1 if post.published_date is None else 0
     return render(request,'user_detail.html',{'user':user,
-    'posts':posts})
+    'posts':posts,
+    'unpublishedCount':unpublishedCount})

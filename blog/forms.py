@@ -7,6 +7,8 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title','text','fulltext')
+        labels = {"text":"Brief description or summary of recipe",
+        "fulltext":"Full recipe or instructions (only shown on post detail page)"}
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254,help_text='Required. Inform a valid email address.')
