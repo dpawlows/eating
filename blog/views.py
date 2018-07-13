@@ -19,11 +19,11 @@ def post_detail(request,pk):
 @login_required
 def post_new(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            #post.published_date = timezone.now() Don't publish on create.
+            # post.image = request.FILES['image']
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
@@ -34,11 +34,14 @@ def post_new(request):
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST, request.FILES,instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
+            # filepath = request.FILES.get('filepath', False)
+            # if filepath != False:
+            #     post.image = request.FILES['file']
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:

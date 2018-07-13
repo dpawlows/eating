@@ -2,7 +2,7 @@
 {% block content %}
   {% if user.is_authenticated %}
     {% if posts_len == 0 %}
-      <p>All posts are published right now.  Great work!</p>
+      <p>You have no unpublished posts!</p>
     {% endif %}
     {% for post in posts %}
       <div class="post">

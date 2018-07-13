@@ -1,5 +1,7 @@
 from django.urls import path, re_path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('',views.post_list,name="post_list"),
@@ -12,4 +14,4 @@ urlpatterns = [
     path('post/<int:pk>/confirm/',views.post_delete_confirm,name='post_delete_confirm'),
     path('signup/',views.signup,name='signup'),
     path('users/<int:pk>/',views.author_detail,name='author_detail'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

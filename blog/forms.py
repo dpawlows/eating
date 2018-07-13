@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title','text','fulltext')
+        fields = ('title','text','fulltext','image')
         labels = {"text":"Brief description or summary of recipe",
         "fulltext":"Full recipe or instructions (only shown on post detail page)"}
 
