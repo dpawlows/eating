@@ -1,5 +1,11 @@
 from django.db import models
 from django.utils import timezone
+from django.forms.widgets import ClearableFileInput
+
+class MyClearableFileInput(ClearableFileInput):
+    initial_text = 'currently'
+    input_text = 'change'
+    clear_checkbox_label = 'remove file'
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User',on_delete=models.CASCADE)
