@@ -1,13 +1,7 @@
 {% extends 'blog/base.html' %}
 {% block content %}
   <div class="post">
-    <h3>Hello {{ user.username }}!</h3>
-    {% if unpublishedCount == 0 %}
-      <h4>You have made a few posts...</h4>
-    {% else %}
-      <h4>You have made a few posts, including {{ unpublishedCount }} unpublished...</h4>
-    {% endif %}
-
+    <h3>{{ author.username }}'s contributions:</h3>
     {% for post in posts %}
       <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
       {% if post.published_date %}
@@ -18,6 +12,8 @@
         </p>
       {% endif %}
       <p>{{ post.text|linebreaksbr }}</p>
+    {% empty %}
+      {{ user.username }} has no posts yet!
     {% endfor %}
 
   </div>

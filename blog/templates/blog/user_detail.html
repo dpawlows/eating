@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+  <div class="post">
+    <h3>Hi {{ user.username }}!</h3>
+    {% if unpublishedCount == 0 %}
+      {% if posts %}
+        <p>You have some posts!</p>
+      {% endif %}
+    {% else %}
+      <p>You have some posts, including <b>{{ unpublishedCount }}</b> unpublished!</p>
+    {% endif %}
+    {% for post in posts %}
+      <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+      {% if post.published_date %}
+        <p>published: {{ post.published_date }}</p>
+      {% else %}
+        <p>created: {{ post.created_date }}
+          <a href="{% url 'post_publish' pk=post.pk %}">Publish this!</a>
+        </p>
+      {% endif %}
+      <p>{{ post.text|linebreaksbr }}</p>
+    {% empty %}
+      {{ user.username }} has no posts yet!
+    {% endfor %}
+
+  </div>
+  {% endblock %}
